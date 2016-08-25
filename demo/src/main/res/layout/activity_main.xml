@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_main"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.isanwenyu.tabview.TabGroup
+        android:id="@+id/tg_tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:elevation="10dp"
+        app:checkedTab="@+id/tab_chat">
+
+        <com.isanwenyu.tabview.TabView
+            android:id="@+id/tab_chat"
+            style="@style/TabView"
+            app:imgDrawable="@drawable/tab_chat"
+            app:textColor="@color/tab_chat_text_selector"
+            app:textSize="@dimen/tab_view_text_size"
+            app:textString="聊天" />
+
+        <com.isanwenyu.tabview.TabView
+            android:id="@+id/tb_app"
+            style="@style/TabView"
+            app:imgDrawable="@drawable/tab_app"
+            app:textColor="@color/tab_app_text_selector"
+            app:textSize="@dimen/tab_view_text_size"
+            app:textString="应用" />
+
+        <com.isanwenyu.tabview.TabView
+            android:id="@+id/tb_pic"
+            style="@style/TabView"
+            app:imgDrawable="@drawable/tab_pic"
+            app:textColor="@color/tab_pic_text_selector"
+            app:textSize="@dimen/tab_view_text_size"
+            app:textString="图片" />
+
+        <com.isanwenyu.tabview.TabView
+            android:id="@+id/tb_user"
+            style="@style/TabView"
+            app:imgDrawable="@drawable/tab_user"
+            app:textColor="@color/tab_user_text_selector"
+            app:textSize="@dimen/tab_view_text_size"
+            app:textString="我" />
+    </com.isanwenyu.tabview.TabGroup>
+</LinearLayout>

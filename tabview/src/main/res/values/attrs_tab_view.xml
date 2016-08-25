@@ -1,0 +1,11 @@
+<resources>
+    <declare-styleable name="TabView">
+        <attr name="textString" format="string" />
+        <attr name="textColor" format="color|reference" />
+        <attr name="textSize" format="dimension" />
+        <attr name="imgDimension" format="dimension" />
+        <attr name="imgDrawable" format="color|reference" />
+        <attr name="imgMargin" format="dimension" />
+        <attr name="tabChecked" format="boolean" />
+    </declare-styleable>
+</resources>

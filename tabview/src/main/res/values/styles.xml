@@ -1,0 +1,13 @@
+<resources>
+
+    <style name="TabViewText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/tab_view_text_size</item>
+        <item name="android:textColor">@color/tab_text_selector</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+</resources>

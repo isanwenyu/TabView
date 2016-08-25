@@ -1,0 +1,5 @@
+<resources>
+    <declare-styleable name="TabGroup">
+        <attr name="checkedTab" format="integer" />
+    </declare-styleable>
+</resources>
