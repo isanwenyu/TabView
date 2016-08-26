@@ -24,7 +24,9 @@
         <com.isanwenyu.tabview.TabView
             android:id="@+id/tab_chat"
             style="@style/TabView"
+            app:imgDimension="@dimen/tab_img_size"
             app:imgDrawable="@drawable/tab_chat"
+            app:imgMargin="@dimen/tab_img_margin"
             app:textColor="@color/tab_chat_text_selector"
             app:textSize="@dimen/tab_view_text_size"
             app:textString="聊天" />
@@ -32,7 +34,9 @@
         <com.isanwenyu.tabview.TabView
             android:id="@+id/tb_app"
             style="@style/TabView"
+            app:imgDimension="@dimen/tab_img_size"
             app:imgDrawable="@drawable/tab_app"
+            app:imgMargin="@dimen/tab_img_margin"
             app:textColor="@color/tab_app_text_selector"
             app:textSize="@dimen/tab_view_text_size"
             app:textString="应用" />
