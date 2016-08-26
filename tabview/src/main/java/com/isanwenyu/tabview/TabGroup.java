@@ -19,7 +19,6 @@ package com.isanwenyu.tabview;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
-import android.support.annotation.IdRes;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -136,7 +135,7 @@ public class TabGroup extends LinearLayout {
      * @see #getCheckedTabViewId()
      * @see #clearCheck()
      */
-    public void check(@IdRes int id) {
+    public void check(int id) {
         // don't even bother
         if (id != -1 && (id == mCheckedId)) {
             return;
@@ -153,7 +152,7 @@ public class TabGroup extends LinearLayout {
         setCheckedId(id);
     }
 
-    private void setCheckedId(@IdRes int id) {
+    private void setCheckedId(int id) {
         mCheckedId = id;
         if (mOnCheckedChangeListener != null) {
             mOnCheckedChangeListener.onCheckedChanged(this, mCheckedId);
@@ -172,11 +171,9 @@ public class TabGroup extends LinearLayout {
      * Upon empty selection, the returned value is -1.</p>
      *
      * @return the unique id of the selected  tab view in this group
-     * @attr ref android.R.styleable#RadioGroup_checkedButton
      * @see #check(int)
      * @see #clearCheck()
      */
-    @IdRes
     public int getCheckedTabViewId() {
         return mCheckedId;
     }
@@ -220,7 +217,7 @@ public class TabGroup extends LinearLayout {
          * @param group     the group in which the checked tab view has changed
          * @param checkedId the unique identifier of the newly checked tab view
          */
-        void onCheckedChanged(TabGroup group, @IdRes int checkedId);
+        void onCheckedChanged(TabGroup group, int checkedId);
     }
 
     private class CheckedStateTracker implements TabView.OnCheckedChangeListener {
