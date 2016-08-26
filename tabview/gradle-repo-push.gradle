@@ -5,6 +5,7 @@ apply plugin: 'com.jfrog.bintray'
 def siteUrl = 'https://github.com/isanwenyu/TabView' // 项目主页
 def gitUrl = 'https://github.com/isanwenyu/TabView.git' // 项目git的clone地址
 group = "com.isanwenyu.tabview" // Maven Group ID for the artifact 一般为包名
+version = '0.1'//版本号
 install {
     repositories.mavenInstaller {
         // This generates POM.xml with proper parameters
