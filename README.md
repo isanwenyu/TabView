@@ -1,8 +1,29 @@
 # Android TabView
+[ ![Download](https://api.bintray.com/packages/isanwenyu/maven/TabView/images/download.svg) ](https://bintray.com/isanwenyu/maven/TabView/_latestVersion)
+
 Android首页底部常用tab切换控件
 > TabGroup 参考 RadioGroup api基本一致 <br>
 > TabView 参考 CompoundButton 实现 checkable 
 
+##Getting Started
+
+ - Add the dependency to your build.gradle.
+ 
+```
+dependencies {
+    compile 'com.isanwenyu.tabview:tabview:0.1'
+}
+```
+- Maven:
+
+```
+<dependency>
+  <groupId>com.isanwenyu.tabview</groupId>
+  <artifactId>tabview</artifactId>
+  <version>0.1</version>
+  <type>pom</type>
+</dependency>
+```
 
 ## Usage
 - xml
@@ -88,8 +109,9 @@ Android首页底部常用tab切换控件
 ![image](https://raw.githubusercontent.com/isanwenyu/TabView/master/gif/tabview_demo.gif)
 
 ## Todo
- 1. 加入中央仓库
- 2. 添加红点标识
+
+ ~~加入中央仓库~~ <br>
+ 添加红点标识
 
 ## License
 
