@@ -106,12 +106,13 @@ dependencies {
 ```
 
 ## Gif
-![image](https://raw.githubusercontent.com/isanwenyu/TabView/master/gif/tabview_demo.gif)
+![image](gif/tabview_demo.gif)
 
 ## Todo
 
  ~~加入中央仓库~~ <br>
- 添加红点标识
+ 添加红点标识 <br>
+ 添加点击水波纹效果
 
 ## License
 
