@@ -22,7 +22,7 @@
         app:checkedTab="@+id/tab_chat">
 
         <com.isanwenyu.tabview.TabView
-            android:id="@+id/tab_chat"
+            android:id="@id/tab_chat"
             style="@style/TabView"
             app:imgDimension="@dimen/tab_img_size"
             app:imgDrawable="@drawable/tab_chat"
@@ -44,6 +44,9 @@
         <com.isanwenyu.tabview.TabView
             android:id="@+id/tb_pic"
             style="@style/TabView"
+            app:badge_color="@android:color/holo_green_dark"
+            app:badge_count="9"
+            app:badge_none_show="true"
             app:imgDrawable="@drawable/tab_pic"
             app:textColor="@color/tab_pic_text_selector"
             app:textSize="@dimen/tab_view_text_size"
@@ -52,6 +55,11 @@
         <com.isanwenyu.tabview.TabView
             android:id="@+id/tb_user"
             style="@style/TabView"
+            app:badge_color="@android:color/holo_orange_dark"
+            app:badge_count="888"
+            app:badge_none_show="true"
+            app:badge_padding_right="@dimen/tab_img_margin"
+            app:badge_padding_top="@dimen/tab_img_margin"
             app:imgDrawable="@drawable/tab_user"
             app:textColor="@color/tab_user_text_selector"
             app:textSize="@dimen/tab_view_text_size"

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.TypedValue;
 
 import com.isanwenyu.tabview.TabGroup;
 import com.isanwenyu.tabview.TabView;
@@ -25,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     ViewPager mViewPager;
     @InjectView(R.id.tg_tab)
     TabGroup mTabGroup;
+    @InjectView(R.id.tab_chat)
+    TabView mChatTabView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //init tab badge view,the others setted in activity_main.xml
+        mChatTabView
+                .setBadgeColor(getResources().getColor(android.R.color.holo_blue_dark))
+                .setmDefaultTopPadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()))
+                .setShown(true);
+
+        ((TabView) mTabGroup.getChildAt(1)).setBadgeCount(999)
+                .setmDefaultTopPadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()))
+                .setShown(true);
     }
 
     /**

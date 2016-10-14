@@ -14,14 +14,17 @@ import android.view.View;
 import android.widget.Checkable;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.itingchunyu.badgeview.IBadgeTextView;
+import com.itingchunyu.badgeview.IBadgeView;
+import com.itingchunyu.badgeview.IBadgeViewImpl;
 
 /**
  * Created by zhuyuanbao on 2016/5/21.
  * Copyright (c) 2016 isanwenyu@163.com. All rights reserved.
  */
-public class TabView extends FrameLayout implements Checkable, View.OnClickListener {
+public class TabView extends FrameLayout implements Checkable, View.OnClickListener, IBadgeViewImpl {
 
     public static final int IMG_DEFAULT_SIZE = 30;
     public static final int TEXT_DEFAULT_SIZE = 14;
@@ -44,6 +47,8 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
 
     private boolean mBroadcasting;//是否调用checkedListener中
     private boolean mChecked;//是否checked状态
+    private IBadgeTextView mBadgeTextView;//徽章控件
+    private FrameLayout mImgContainer;//图片控件容器
 
     public TabView(Context context) {
         this(context, null);
@@ -92,6 +97,8 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
         }
 
         a.recycle();
+
+        mBadgeTextView = new IBadgeTextView(getContext(), attrs);
         //初始化
         initView();
 
@@ -104,6 +111,8 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
         LayoutInflater.from(getContext()).inflate(R.layout.layout_tab_view, this, true);
         mTabImgView = (ImageView) findViewById(R.id.iv_tab_img);
         mTabTextView = (TextView) findViewById(R.id.tv_tab_text);
+        mImgContainer = (FrameLayout) findViewById(R.id.layout_img_container);
+
         //设置自定义属性
         setTextString(mTextString);
         setTextColor(mTextColor);
@@ -116,6 +125,8 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
         setClickable(true);
         //注册点击事件后 performClick响应
         setOnClickListener(this);
+        //初始化徽章布局的目标布局
+        mBadgeTextView.setTargetView(mImgContainer);
     }
 
     public String getTextString() {
@@ -167,7 +178,7 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
         if (mImgDimension > 0) {
             this.mImgDimension = mImgDimension;
             //如果自定义
-            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) mTabImgView.getLayoutParams();
+            FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) mTabImgView.getLayoutParams();
             layoutParams.height = (int) mImgDimension;
         }
     }
@@ -291,6 +302,31 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
         super.onRestoreInstanceState(ss.getSuperState());
         setChecked(ss.checked);
         requestLayout();
+    }
+
+    @Override
+    public IBadgeView setBadgeCount(int count) {
+        return mBadgeTextView.setBadgeCount(count);
+    }
+
+    @Override
+    public IBadgeView setBadgeShown(boolean isShowBadge) {
+        return mBadgeTextView.setBadgeShown(isShowBadge);
+    }
+
+    @Override
+    public IBadgeView setBadgeColor(int color) {
+        return mBadgeTextView.setBadgeColor(color);
+    }
+
+    @Override
+    public IBadgeView setmDefaultTopPadding(int mDefaultTopPadding) {
+        return mBadgeTextView.setmDefaultTopPadding(mDefaultTopPadding);
+    }
+
+    @Override
+    public IBadgeView setmDefaultRightPadding(int mDefaultRightPadding) {
+        return mBadgeTextView.setmDefaultRightPadding(mDefaultRightPadding);
     }
 
     /**
