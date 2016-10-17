@@ -25,4 +25,23 @@ dependencies {
     compile 'com.itingchunyu.badgeview:badgeview:1.0.4'
 }
 
-apply from: './gradle-repo-push.gradle'
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'TabView'
+    publishedGroupId = 'com.isanwenyu.tabview'
+    libraryName = 'TabView'
+    artifact = 'tabview'
+    libraryDescription = 'Android首页底部常用tab切换控件'
+    siteUrl = 'https://github.com/isanwenyu/TabView'
+    gitUrl = 'https://github.com/isanwenyu/TabView.git'
+    libraryVersion = '0.2'
+    developerId = 'isanwenyu'
+    developerName = 'isanwenyu'
+    developerEmail = 'isanwenyu@163.com'
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+apply from: 'https://raw.githubusercontent.com/isanwenyu/BintrayUploadGradle/master/bintray_upload.gradle'
