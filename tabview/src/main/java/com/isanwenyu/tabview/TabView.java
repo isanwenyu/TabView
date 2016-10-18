@@ -120,11 +120,11 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
         setImgDrawable(mImgDrawable);
         setImgDimension(mImgDimension);
         setImgMargin(mImgMargin);
-
         setChecked(mChecked);
         setClickable(true);
         //注册点击事件后 performClick响应
         setOnClickListener(this);
+
         //初始化徽章布局的目标布局
         mBadgeTextView.setTargetView(mImgContainer);
     }
@@ -192,6 +192,25 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
             this.mImgDrawable = mImgDrawable;
             mTabImgView.setImageDrawable(mImgDrawable);
         }
+    }
+
+    /**
+     * 设置图片控件的父类容器的padding
+     */
+    public void setImgContainerPadding(int padding) {
+        mImgContainer.setPadding(padding, padding, padding, padding);
+    }
+
+    public ImageView getTabImgView() {
+        return mTabImgView;
+    }
+
+    public FrameLayout getImgContainer() {
+        return mImgContainer;
+    }
+
+    public TextView getTabTextView() {
+        return mTabTextView;
     }
 
     /**
