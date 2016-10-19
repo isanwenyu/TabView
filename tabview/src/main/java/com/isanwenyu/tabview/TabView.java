@@ -19,15 +19,13 @@ import android.widget.TextView;
 
 import com.andexert.library.RippleView;
 import com.itingchunyu.badgeview.IBadgeTextView;
-import com.itingchunyu.badgeview.IBadgeView;
-import com.itingchunyu.badgeview.IBadgeViewImpl;
 
 /**
  * 继承水波纹控件RippleView 支持其所有属性
  * Created by isanwenyu on 2016/5/21.
  * Copyright (c) 2016 isanwenyu@163.com. All rights reserved.
  */
-public class TabView extends RippleView implements Checkable, IBadgeViewImpl, RippleView.OnRippleCompleteListener {
+public class TabView extends RippleView implements Checkable, BadgeViewControl, RippleView.OnRippleCompleteListener {
 
     public static final int IMG_DEFAULT_SIZE = 30;
     public static final int TEXT_DEFAULT_SIZE = 14;
@@ -149,72 +147,79 @@ public class TabView extends RippleView implements Checkable, IBadgeViewImpl, Ri
         return mTextString;
     }
 
-    public void setTextString(String mTextString) {
+    public TabView setTextString(String mTextString) {
         this.mTextString = mTextString;
         mTabTextView.setText(mTextString);
+        return this;
     }
 
     public ColorStateList getTextColor() {
         return mTextColor;
     }
 
-    public void setTextColor(ColorStateList mTextColor) {
+    public TabView setTextColor(ColorStateList mTextColor) {
         if (mTextColor != null) {
             this.mTextColor = mTextColor;
             mTabTextView.setTextColor(mTextColor);
         }
+        return this;
     }
 
     public float getImgMargin() {
         return mImgMargin;
     }
 
-    public void setImgMargin(float mImgMargin) {
+    public TabView setImgMargin(float mImgMargin) {
         this.mImgMargin = mImgMargin;
         MarginLayoutParams marginLayoutParams = (MarginLayoutParams) mTabImgView.getLayoutParams();
         marginLayoutParams.setMargins(((int) mImgMargin), ((int) mImgMargin), ((int) mImgMargin), ((int) mImgMargin));
+        return this;
     }
 
     public float getTextSize() {
         return mTextSize;
     }
 
-    public void setTextSize(float mTextSize) {
+    public TabView setTextSize(float mTextSize) {
         if (mTextSize > 0) {
             this.mTextSize = mTextSize;
             mTabTextView.setTextSize(mTextSize);
         }
+        return this;
     }
 
     public float getImgDimension() {
         return mImgDimension;
     }
 
-    public void setImgDimension(float mImgDimension) {
+    public TabView setImgDimension(float mImgDimension) {
         if (mImgDimension > 0) {
             this.mImgDimension = mImgDimension;
             //如果自定义
             FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) mTabImgView.getLayoutParams();
             layoutParams.height = (int) mImgDimension;
         }
+        return this;
     }
 
     public Drawable getImgDrawable() {
         return mImgDrawable;
     }
 
-    public void setImgDrawable(Drawable mImgDrawable) {
+    public TabView setImgDrawable(Drawable mImgDrawable) {
         if (mImgDrawable != null) {
             this.mImgDrawable = mImgDrawable;
             mTabImgView.setImageDrawable(mImgDrawable);
         }
+        return this;
     }
 
     /**
      * 设置图片控件的父类容器的padding
      */
-    public void setImgContainerPadding(int padding) {
+    public TabView setImgContainerPadding(int padding) {
         mImgContainer.setPadding(padding, padding, padding, padding);
+        return this;
     }
 
     public ImageView getTabImgView() {
@@ -337,45 +342,46 @@ public class TabView extends RippleView implements Checkable, IBadgeViewImpl, Ri
      * 设置徽章控件相关属性
      *******************************************************/
     @Override
-    public IBadgeView setBadgeCount(int count) {
-        return mBadgeTextView.setBadgeCount(count);
+    public TabView setBadgeCount(int count) {
+        mBadgeTextView.setBadgeCount(count);
+        return this;
     }
 
     @Override
-    public IBadgeView setBadgeShown(boolean isShowBadge) {
-        return mBadgeTextView.setBadgeShown(isShowBadge);
+    public TabView setBadgeShown(boolean isShowBadge) {
+        mBadgeTextView.setBadgeShown(isShowBadge);
+        return this;
     }
 
     @Override
-    public IBadgeView setBadgeColor(int color) {
-        return mBadgeTextView.setBadgeColor(color);
+    public TabView setBadgeColor(int color) {
+        mBadgeTextView.setBadgeColor(color);
+        return this;
     }
 
     @Override
-    public IBadgeView setmDefaultTopPadding(int mDefaultTopPadding) {
-        return mBadgeTextView.setmDefaultTopPadding(mDefaultTopPadding);
+    public TabView setmDefaultTopPadding(int mDefaultTopPadding) {
+        mBadgeTextView.setmDefaultTopPadding(mDefaultTopPadding);
+        return this;
     }
 
     @Override
-    public IBadgeView setmDefaultRightPadding(int mDefaultRightPadding) {
-        return mBadgeTextView.setmDefaultRightPadding(mDefaultRightPadding);
+    public TabView setmDefaultRightPadding(int mDefaultRightPadding) {
+        mBadgeTextView.setmDefaultRightPadding(mDefaultRightPadding);
+        return this;
     }
 
     /***************************
      * 设置水波纹效果相关属性
      *******************************************************/
 
-    public void setRippleEnable(boolean rippleEnable) {
+    public TabView setRippleEnable(boolean rippleEnable) {
         this.mRippleEnable = rippleEnable;
         if (!rippleEnable) {
             //如果不可用设置水波纹动画时间为0
             setRippleDuration(0);
         }
-    }
-
-    @Override
-    public void setRippleDuration(int rippleDuration) {
-        super.setRippleDuration(rippleDuration);
+        return this;
     }
 
     @Override
