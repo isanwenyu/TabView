@@ -8,5 +8,6 @@
         <attr name="imgMargin" format="dimension" />
         <attr name="imgContainerPadding" format="dimension" />
         <attr name="tabChecked" format="boolean" />
+        <attr name="tabRippleEnable" format="boolean" />
     </declare-styleable>
 </resources>

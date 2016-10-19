@@ -8,6 +8,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.SoundEffectConstants;
 import android.view.View;
@@ -16,15 +17,17 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.andexert.library.RippleView;
 import com.itingchunyu.badgeview.IBadgeTextView;
 import com.itingchunyu.badgeview.IBadgeView;
 import com.itingchunyu.badgeview.IBadgeViewImpl;
 
 /**
+ * 继承水波纹控件RippleView 支持其所有属性
  * Created by isanwenyu on 2016/5/21.
  * Copyright (c) 2016 isanwenyu@163.com. All rights reserved.
  */
-public class TabView extends FrameLayout implements Checkable, View.OnClickListener, IBadgeViewImpl {
+public class TabView extends RippleView implements Checkable, IBadgeViewImpl, RippleView.OnRippleCompleteListener {
 
     public static final int IMG_DEFAULT_SIZE = 30;
     public static final int TEXT_DEFAULT_SIZE = 14;
@@ -53,6 +56,8 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
     private boolean mChecked;//是否checked状态
     private IBadgeTextView mBadgeTextView;//徽章控件
     private FrameLayout mImgContainer;//图片控件容器
+    private boolean mRippleEnable = true;//是否开启水波纹效果 默认为true
+    private OnRippleCompleteListener mOnRippleCompleteListener;//用户设置的水波纹完成监听器
 
     public TabView(Context context) {
         this(context, null);
@@ -97,6 +102,9 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
         mChecked = a.getBoolean(
                 R.styleable.TabView_tabChecked,
                 mChecked);
+        mRippleEnable = a.getBoolean(
+                R.styleable.TabView_tabRippleEnable,
+                mRippleEnable);
 
         if (a.hasValue(R.styleable.TabView_imgDrawable)) {
             mImgDrawable = a.getDrawable(
@@ -119,7 +127,7 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
         mTabImgView = (ImageView) findViewById(R.id.iv_tab_img);
         mTabTextView = (TextView) findViewById(R.id.tv_tab_text);
         mImgContainer = (FrameLayout) findViewById(R.id.layout_img_container);
-
+        setGravity(Gravity.CENTER);
         //设置自定义属性
         setTextString(mTextString);
         setTextColor(mTextColor);
@@ -129,10 +137,10 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
         setImgMargin(mImgMargin);
         setImgContainerPadding((int) mImgContainerPadding);
         setChecked(mChecked);
-        setClickable(true);
-        //注册点击事件后 performClick响应
-        setOnClickListener(this);
-
+        //初始化ripple相关属性
+        setRippleEnable(mRippleEnable);
+        //注册父类的OnRippleCompleteListener 响应#onComplete()方法
+        super.setOnRippleCompleteListener(this);
         //初始化徽章布局的目标布局
         mBadgeTextView.setTargetView(mImgContainer);
     }
@@ -295,8 +303,7 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
 
     @Override
     public boolean performClick() {
-        toggle();
-
+//        toggle();
         final boolean handled = super.performClick();
         if (!handled) {
             // View only makes a sound effect if the onClickListener was
@@ -305,11 +312,6 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
         }
 
         return handled;
-    }
-
-    @Override
-    public void onClick(View v) {
-
     }
 
     @Override
@@ -331,6 +333,9 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
         requestLayout();
     }
 
+    /***************************
+     * 设置徽章控件相关属性
+     *******************************************************/
     @Override
     public IBadgeView setBadgeCount(int count) {
         return mBadgeTextView.setBadgeCount(count);
@@ -354,6 +359,37 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
     @Override
     public IBadgeView setmDefaultRightPadding(int mDefaultRightPadding) {
         return mBadgeTextView.setmDefaultRightPadding(mDefaultRightPadding);
+    }
+
+    /***************************
+     * 设置水波纹效果相关属性
+     *******************************************************/
+
+    public void setRippleEnable(boolean rippleEnable) {
+        this.mRippleEnable = rippleEnable;
+        if (!rippleEnable) {
+            //如果不可用设置水波纹动画时间为0
+            setRippleDuration(0);
+        }
+    }
+
+    @Override
+    public void setRippleDuration(int rippleDuration) {
+        super.setRippleDuration(rippleDuration);
+    }
+
+    @Override
+    public void setOnRippleCompleteListener(final OnRippleCompleteListener listener) {
+        this.mOnRippleCompleteListener = listener;
+    }
+
+    @Override
+    public void onComplete(RippleView rippleView) {
+        //水波纹动画完成后自动切换TabView状态
+        toggle();
+        if (mOnRippleCompleteListener != null) {
+            mOnRippleCompleteListener.onComplete(this);
+        }
     }
 
     /**

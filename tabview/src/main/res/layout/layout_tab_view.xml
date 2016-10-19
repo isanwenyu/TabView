@@ -15,7 +15,8 @@
         <ImageView
             android:id="@+id/iv_tab_img"
             android:layout_width="@dimen/tab_img_size"
-            android:layout_height="@dimen/tab_img_size" />
+            android:layout_height="@dimen/tab_img_size"
+            android:layout_margin="@dimen/tab_img_margin" />
     </FrameLayout>
 
     <TextView
