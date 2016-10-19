@@ -24,6 +24,7 @@
         <com.isanwenyu.tabview.TabView
             android:id="@id/tab_chat"
             style="@style/TabView"
+            app:imgContainerPadding="@dimen/tab_img_container_padding"
             app:imgDimension="@dimen/tab_img_size"
             app:imgDrawable="@drawable/tab_chat"
             app:imgMargin="@dimen/tab_img_margin"
@@ -34,6 +35,7 @@
         <com.isanwenyu.tabview.TabView
             android:id="@+id/tb_app"
             style="@style/TabView"
+            app:imgContainerPadding="@dimen/tab_img_container_padding"
             app:imgDimension="@dimen/tab_img_size"
             app:imgDrawable="@drawable/tab_app"
             app:imgMargin="@dimen/tab_img_margin"
@@ -47,7 +49,9 @@
             app:badge_color="@android:color/holo_green_dark"
             app:badge_count="9"
             app:badge_none_show="true"
+            app:imgContainerPadding="@dimen/tab_img_container_padding"
             app:imgDrawable="@drawable/tab_pic"
+            app:imgMargin="@dimen/tab_img_margin"
             app:textColor="@color/tab_pic_text_selector"
             app:textSize="@dimen/tab_view_text_size"
             app:textString="图片" />
@@ -58,9 +62,11 @@
             app:badge_color="@android:color/holo_orange_dark"
             app:badge_count="888"
             app:badge_none_show="true"
-            app:badge_padding_right="@dimen/tab_img_margin"
-            app:badge_padding_top="@dimen/tab_img_margin"
+            app:badge_padding_right="@dimen/tab_img_container_padding"
+            app:badge_padding_top="@dimen/tab_img_container_padding"
+            app:imgContainerPadding="@dimen/tab_img_container_padding"
             app:imgDrawable="@drawable/tab_user"
+            app:imgMargin="@dimen/tab_img_margin"
             app:textColor="@color/tab_user_text_selector"
             app:textSize="@dimen/tab_view_text_size"
             app:textString="我" />

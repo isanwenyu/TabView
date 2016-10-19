@@ -21,14 +21,15 @@ import com.itingchunyu.badgeview.IBadgeView;
 import com.itingchunyu.badgeview.IBadgeViewImpl;
 
 /**
- * Created by zhuyuanbao on 2016/5/21.
+ * Created by isanwenyu on 2016/5/21.
  * Copyright (c) 2016 isanwenyu@163.com. All rights reserved.
  */
 public class TabView extends FrameLayout implements Checkable, View.OnClickListener, IBadgeViewImpl {
 
     public static final int IMG_DEFAULT_SIZE = 30;
     public static final int TEXT_DEFAULT_SIZE = 14;
-    private static final float IMG_DEFAULT_MARGIN = 5;
+    private static final float IMG_DEFAULT_MARGIN = 0;
+    private static final float IMG_CONTAINER_DEFAULT_PADDING = 2;
     ImageView mTabImgView;
     TextView mTabTextView;
 
@@ -38,8 +39,11 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
     private float mTextSize = TEXT_DEFAULT_SIZE;
     //默认图片尺寸 默认单位dp
     private float mImgDimension = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, IMG_DEFAULT_SIZE, getResources().getDisplayMetrics());
-    private float mImgMargin = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, IMG_DEFAULT_MARGIN, getResources().getDisplayMetrics());
     //图片外边距
+    private float mImgMargin = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, IMG_DEFAULT_MARGIN, getResources().getDisplayMetrics());
+    //包含图片容器的内边距
+    private float mImgContainerPadding = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, IMG_CONTAINER_DEFAULT_PADDING, getResources().getDisplayMetrics());
+
     private Drawable mImgDrawable;//图片资源
 
     private OnCheckedChangeListener mOnCheckedChangeListener;
@@ -87,6 +91,9 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
         mImgMargin = a.getDimension(
                 R.styleable.TabView_imgMargin,
                 mImgMargin);
+        mImgContainerPadding = a.getDimension(
+                R.styleable.TabView_imgContainerPadding,
+                mImgContainerPadding);
         mChecked = a.getBoolean(
                 R.styleable.TabView_tabChecked,
                 mChecked);
@@ -120,6 +127,7 @@ public class TabView extends FrameLayout implements Checkable, View.OnClickListe
         setImgDrawable(mImgDrawable);
         setImgDimension(mImgDimension);
         setImgMargin(mImgMargin);
+        setImgContainerPadding((int) mImgContainerPadding);
         setChecked(mChecked);
         setClickable(true);
         //注册点击事件后 performClick响应

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical">
 
@@ -9,7 +10,7 @@
         android:id="@+id/layout_img_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/tab_img_margin">
+        android:padding="@dimen/tab_img_container_padding">
 
         <ImageView
             android:id="@+id/iv_tab_img"
