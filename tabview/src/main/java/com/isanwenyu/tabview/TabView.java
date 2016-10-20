@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.ColorRes;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -25,7 +26,7 @@ import com.itingchunyu.badgeview.IBadgeTextView;
  * Created by isanwenyu on 2016/5/21.
  * Copyright (c) 2016 isanwenyu@163.com. All rights reserved.
  */
-public class TabView extends RippleView implements Checkable, BadgeViewControl, RippleView.OnRippleCompleteListener {
+public class TabView extends RippleView implements Checkable, BadgeViewControl, RippleViewControl, RippleView.OnRippleCompleteListener {
 
     public static final int IMG_DEFAULT_SIZE = 30;
     public static final int TEXT_DEFAULT_SIZE = 14;
@@ -136,7 +137,7 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
         setImgContainerPadding((int) mImgContainerPadding);
         setChecked(mChecked);
         //初始化ripple相关属性
-        setRippleEnable(mRippleEnable);
+        setTabRippleEnable(mRippleEnable);
         //注册父类的OnRippleCompleteListener 响应#onComplete()方法
         super.setOnRippleCompleteListener(this);
         //初始化徽章布局的目标布局
@@ -375,7 +376,7 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
      * 设置水波纹效果相关属性
      *******************************************************/
 
-    public TabView setRippleEnable(boolean rippleEnable) {
+    public TabView setTabRippleEnable(boolean rippleEnable) {
         this.mRippleEnable = rippleEnable;
         if (!rippleEnable) {
             //如果不可用设置水波纹动画时间为0
@@ -385,17 +386,78 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
     }
 
     @Override
-    public void setOnRippleCompleteListener(final OnRippleCompleteListener listener) {
-        this.mOnRippleCompleteListener = listener;
-    }
-
-    @Override
     public void onComplete(RippleView rippleView) {
         //水波纹动画完成后自动切换TabView状态
         toggle();
         if (mOnRippleCompleteListener != null) {
             mOnRippleCompleteListener.onComplete(this);
         }
+    }
+
+    @Override
+    public TabView setTabRippleFrameRate(int frameRate) {
+        setFrameRate(frameRate);
+        return this;
+    }
+
+    @Override
+    public TabView setTabRippleDuration(int rippleDuration) {
+        setRippleDuration(rippleDuration);
+        return this;
+    }
+
+    @Override
+    public TabView setTabRippleAlpha(int rippleAlpha) {
+        setAlpha(rippleAlpha);
+        return this;
+    }
+
+    @Override
+    public TabView setTabRippleZoomDuration(int zoomDuration) {
+        setZoomDuration(zoomDuration);
+        return this;
+    }
+
+    @Override
+    public TabView setTabRippleZoomScale(float zoomScale) {
+        setZoomScale(zoomScale);
+        return this;
+    }
+
+    @Override
+    public TabView setTabRippleColor(@ColorRes int rippleColor) {
+        setRippleColor(rippleColor);
+        return this;
+    }
+
+    @Override
+    public TabView setTabRipplePadding(int ripplePadding) {
+        setRipplePadding(ripplePadding);
+        return this;
+    }
+
+    @Override
+    public TabView setTabRippleType(RippleType rippleType) {
+        setRippleType(rippleType);
+        return this;
+    }
+
+    @Override
+    public TabView setTabRippleCentered(Boolean isCentered) {
+        setCentered(isCentered);
+        return this;
+    }
+
+    @Override
+    public TabView setTabRippleZooming(Boolean hasToZoom) {
+        setZooming(hasToZoom);
+        return this;
+    }
+
+    @Override
+    public TabView setOnTabRippleCompleteListener(OnRippleCompleteListener listener) {
+        this.mOnRippleCompleteListener = listener;
+        return this;
     }
 
     /**

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.TypedValue;
 
 import com.andexert.library.RippleView;
 import com.isanwenyu.tabview.TabGroup;
@@ -67,19 +68,22 @@ public class MainActivity extends AppCompatActivity {
         //init tab badge view && ripple view,the others setted in activity_main.xml
         mChatTabView
                 .setBadgeColor(getResources().getColor(android.R.color.holo_blue_dark))
-//                .setmDefaultTopPadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()))
-                .setShown(true);
-        mChatTabView.setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+                .setmDefaultTopPadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()))
+                .setBadgeShown(true)
+                .setTabRippleCentered(false)
+                .setTabRippleColor(android.R.color.holo_blue_dark)
+                .setTabRippleDuration(100)
+                //override setOnRippleCompleteListener method in rippleView
+                .setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
             @Override
             public void onComplete(RippleView rippleView) {
-
+                mChatTabView.setChecked(true);
             }
         });
-        mChatTabView.setRippleColor(android.R.color.holo_blue_dark);
         ((TabView) mTabGroup.getChildAt(1)).setBadgeCount(999)
-//                .setmDefaultTopPadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()))
-                .setShown(true);
-        ((TabView) mTabGroup.getChildAt(1)).setRippleColor(android.R.color.holo_red_dark);
+                .setmDefaultTopPadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()))
+                .setBadgeShown(true)
+                .setTabRippleEnable(false);
     }
 
     /**
