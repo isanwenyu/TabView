@@ -4,9 +4,20 @@
 [![License](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 Android首页底部常用tab切换控件
+
+## Features
+- TabViews in TabGroup only one can be checked
 > TabGroup 参考 RadioGroup api基本一致 <br>
 > TabView 参考 CompoundButton 实现 checkable 
 
+- Support badge view for reminding
+> BadgeView is from [https://github.com/liyanxi/BadgeView ](https://github.com/liyanxi/BadgeView ).All its attributes can also apply in the tabview.
+
+- Support water ripple effect when it's clicked
+> Water Ripple View is from [https://github.com/isanwenyu/RippleEffect](https://github.com/isanwenyu/RippleEffect). TabView inherit from RippleView so all its attributes can also apply in the tabview.
+
+- Support chain API 
+> Implement BadgeViewControl and RippleViewControl interface support chain API.
 
 ## Quick Overview
 ![image](gif/tabview_demo.gif)
@@ -17,7 +28,7 @@ Android首页底部常用tab切换控件
  
 ```
 dependencies {
- 	compile 'com.isanwenyu.tabview:tabview:0.2'
+ 	compile 'com.isanwenyu.tabview:tabview:1.0.0'
 }
 ```
 - Maven:
@@ -26,7 +37,7 @@ dependencies {
 <dependency>
   <groupId>com.isanwenyu.tabview</groupId>
   <artifactId>tabview</artifactId>
-  <version>0.2</version>
+  <version>1.0.0</version>
   <type>pom</type>
 </dependency>
 ```
@@ -36,6 +47,7 @@ dependencies {
 - xml
 
 ```
+
     <com.isanwenyu.tabview.TabGroup
         android:id="@+id/tg_tab"
         android:layout_width="match_parent"
@@ -43,37 +55,8 @@ dependencies {
         android:background="@android:color/white"
         android:elevation="10dp"
         app:checkedTab="@+id/tab_chat">
-
-        <com.isanwenyu.tabview.TabView
-            android:id="@id/tab_chat"
-            style="@style/TabView"
-            app:imgDimension="@dimen/tab_img_size"
-            app:imgDrawable="@drawable/tab_chat"
-            app:imgMargin="@dimen/tab_img_margin"
-            app:textColor="@color/tab_chat_text_selector"
-            app:textSize="@dimen/tab_view_text_size"
-            app:textString="聊天" />
-
-        <com.isanwenyu.tabview.TabView
-            android:id="@+id/tb_app"
-            style="@style/TabView"
-            app:imgDimension="@dimen/tab_img_size"
-            app:imgDrawable="@drawable/tab_app"
-            app:imgMargin="@dimen/tab_img_margin"
-            app:textColor="@color/tab_app_text_selector"
-            app:textSize="@dimen/tab_view_text_size"
-            app:textString="应用" />
-
-        <com.isanwenyu.tabview.TabView
-            android:id="@+id/tb_pic"
-            style="@style/TabView"
-            app:badge_color="@android:color/holo_green_dark"
-            app:badge_count="9"
-            app:badge_none_show="true"
-            app:imgDrawable="@drawable/tab_pic"
-            app:textColor="@color/tab_pic_text_selector"
-            app:textSize="@dimen/tab_view_text_size"
-            app:textString="图片" />
+        
+		......
 
         <com.isanwenyu.tabview.TabView
             android:id="@+id/tb_user"
@@ -81,80 +64,59 @@ dependencies {
             app:badge_color="@android:color/holo_orange_dark"
             app:badge_count="888"
             app:badge_none_show="true"
-            app:badge_padding_right="@dimen/tab_img_margin"
-            app:badge_padding_top="@dimen/tab_img_margin"
+            app:badge_padding_right="@dimen/tab_img_container_padding"
+            app:badge_padding_top="@dimen/tab_img_container_padding"
+            app:imgContainerPadding="@dimen/custom_img_container_padding"
             app:imgDrawable="@drawable/tab_user"
+            app:imgMargin="@dimen/tab_img_margin"
+            app:rv_centered="true"
+            app:rv_color="@android:color/holo_orange_dark"
+            app:rv_framerate="20"
+            app:rv_rippleDuration="100"
+            app:rv_zoom="true"
+            app:rv_zoomDuration="200"
+            app:rv_zoomScale="1.2"
             app:textColor="@color/tab_user_text_selector"
             app:textSize="@dimen/tab_view_text_size"
             app:textString="我" />
-    </com.isanwenyu.tabview.TabGroup>     
+    </com.isanwenyu.tabview.TabGroup>
 ```
 
 - code
 
 ```
- mTabGroup.setOnCheckedChangeListener(new TabGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(TabGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.tab_chat:
-                        setCurrentFragment(TAB_CHAT);
-                        break;
-                    case R.id.tb_pic:
-                        setCurrentFragment(TAB_PIC);
-                        break;
-                    case R.id.tb_app:
-                        setCurrentFragment(TAB_APP);
-                        break;
-                    case R.id.tb_user:
-                        setCurrentFragment(TAB_USER);
-                        break;
-                }
-            }
-        });
 
-```
-```
-   mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                ((TabView) mTabGroup.getChildAt(position)).setChecked(true);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
-```
-- BadgeView is from [https://github.com/liyanxi/BadgeView ](https://github.com/liyanxi/BadgeView ).All its attributes can also apply in the tabview.
-
-```
-        //init tab badge view,the others setted in activity_main.xml
+        //init tab badge view && ripple view,the others setted in activity_main.xml
         mChatTabView
                 .setBadgeColor(getResources().getColor(android.R.color.holo_blue_dark))
-                .setmDefaultTopPadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()))
-                .setShown(true);
-
+                .setmDefaultTopPadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()))
+                .setBadgeShown(true)
+                .setTabRippleCentered(false)
+                .setTabRippleColor(android.R.color.holo_blue_dark)
+                .setTabRippleDuration(100)
+                //override setOnRippleCompleteListener method in rippleView
+                .setOnRippleCompleteListener(new RippleView.OnRippleCompleteListener() {
+            @Override
+            public void onComplete(RippleView rippleView) {
+                mChatTabView.setChecked(true);
+            }
+        });
         ((TabView) mTabGroup.getChildAt(1)).setBadgeCount(999)
-                .setmDefaultTopPadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, getResources().getDisplayMetrics()))
-                .setShown(true);
+                .setmDefaultTopPadding((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, getResources().getDisplayMetrics()))
+                .setBadgeShown(true)
+                .setTabRippleEnable(false);
 ```
 
 ## Todo
 
  ~~加入中央仓库~~ <br>
  ~~添加红点标识~~ <br>
- 添加点击水波纹效果
+ ~~添加点击水波纹效果~~
  
 ## Dependencies
 - [https://github.com/liyanxi/BadgeView](https://github.com/liyanxi/BadgeView) 徽章控件 显示数字提醒 小红点
 - [https://github.com/isanwenyu/BintrayUploadGradle](https://github.com/isanwenyu/BintrayUploadGradle) 上传repo到bintray并添加到JCenter的gradle脚步库
+- [https://github.com/isanwenyu/RippleEffect](https://github.com/isanwenyu/RippleEffect) support water ripple effect 
 
 ## License
 
