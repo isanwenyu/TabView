@@ -19,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.andexert.library.RippleView;
-import com.itingchunyu.badgeview.IBadgeTextView;
+import com.itingchunyu.badgeview.BadgeTextView;
 
 /**
  * 继承水波纹控件RippleView 支持其所有属性
@@ -53,7 +53,7 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
 
     private boolean mBroadcasting;//是否调用checkedListener中
     private boolean mChecked;//是否checked状态
-    private IBadgeTextView mBadgeTextView;//徽章控件
+    private BadgeTextView mBadgeTextView;//徽章控件
     private FrameLayout mImgContainer;//图片控件容器
     private boolean mRippleEnable = true;//是否开启水波纹效果 默认为true
     private OnRippleCompleteListener mOnRippleCompleteListener;//用户设置的水波纹完成监听器
@@ -112,7 +112,7 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
 
         a.recycle();
 
-        mBadgeTextView = new IBadgeTextView(getContext(), attrs);
+        mBadgeTextView = new BadgeTextView(getContext(), attrs);
         //初始化
         initView();
 

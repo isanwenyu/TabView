@@ -6,6 +6,7 @@ package com.isanwenyu.tabview;
  * Created by isanwenyu on 16/9/26.
  * Copyright (c) 2016 isanwenyu@163.com. All rights reserved.
  * </pre>
+ * @see com.itingchunyu.badgeview.IBadgeView
  */
 public interface BadgeViewControl {
     /**
