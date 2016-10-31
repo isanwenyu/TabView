@@ -57,6 +57,7 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
     private FrameLayout mImgContainer;//图片控件容器
     private boolean mRippleEnable = true;//是否开启水波纹效果 默认为true
     private OnRippleCompleteListener mOnRippleCompleteListener;//用户设置的水波纹完成监听器
+    private boolean mBadgeShow;//徽章控件是否显示
 
     public TabView(Context context) {
         this(context, null);
@@ -112,6 +113,13 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
 
         a.recycle();
 
+        //get the attrs from BadgeViewUtil
+        final TypedArray b = getContext().obtainStyledAttributes(
+                attrs, R.styleable.BadgeViewUtil, defStyle, 0);
+        //reset badge none show attribute default false
+        mBadgeShow = b.getBoolean(R.styleable.BadgeViewUtil_badge_none_show, false);
+        b.recycle();
+
         mBadgeTextView = new BadgeTextView(getContext(), attrs);
         //初始化
         initView();
@@ -138,10 +146,11 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
         setChecked(mChecked);
         //初始化ripple相关属性
         setTabRippleEnable(mRippleEnable);
-        //注册父类的OnRippleCompleteListener 响应#onComplete()方法
-        super.setOnRippleCompleteListener(this);
+        //注册父类的OnRippleCompleteListener 响应#onComplete()方法 //修改为TabView直接响应点击事件
+//        super.setOnRippleCompleteListener(this);
         //初始化徽章布局的目标布局
         mBadgeTextView.setTargetView(mImgContainer);
+        setBadgeShown(mBadgeShow);
     }
 
     public String getTextString() {
@@ -309,7 +318,7 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
 
     @Override
     public boolean performClick() {
-//        toggle();
+        toggle();
         final boolean handled = super.performClick();
         if (!handled) {
             // View only makes a sound effect if the onClickListener was
@@ -388,7 +397,7 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
     @Override
     public void onComplete(RippleView rippleView) {
         //水波纹动画完成后自动切换TabView状态
-        toggle();
+//        toggle();
         if (mOnRippleCompleteListener != null) {
             mOnRippleCompleteListener.onComplete(this);
         }
