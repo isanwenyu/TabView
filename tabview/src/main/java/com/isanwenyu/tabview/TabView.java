@@ -339,18 +339,24 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
         return ss;
     }
 
+    /**
+     * @param state
+     * @see android.support.v4.view.ViewPager#onRestoreInstanceState(Parcelable)
+     */
     @Override
     public void onRestoreInstanceState(Parcelable state) {
         // fix bug  java.lang.ClassCastException: android.view.AbsSavedState$1 cannot be cast to com.isanwenyu.tabview.TabView$SavedState
-        try {
-            SavedState ss = (SavedState) state;
 
-            super.onRestoreInstanceState(ss.getSuperState());
-            setChecked(ss.checked);
-            requestLayout();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (!(state instanceof SavedState)) {
+            super.onRestoreInstanceState(state);
+            return;
         }
+
+        SavedState ss = (SavedState) state;
+
+        super.onRestoreInstanceState(ss.getSuperState());
+        setChecked(ss.checked);
+        requestLayout();
     }
 
     /***************************
