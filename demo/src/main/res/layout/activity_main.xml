@@ -30,6 +30,7 @@
             app:imgMargin="@dimen/tab_img_margin"
             app:textColor="@color/tab_chat_text_selector"
             app:textSize="@dimen/tab_view_text_size"
+            app:textShown="false"
             app:textString="聊天" />
 
         <com.isanwenyu.tabview.TabView

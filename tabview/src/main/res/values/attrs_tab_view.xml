@@ -1,5 +1,6 @@
 <resources>
     <declare-styleable name="TabView">
+        <attr name="textShown" format="boolean" />
         <attr name="textString" format="string" />
         <attr name="textColor" format="color|reference" />
         <attr name="textSize" format="dimension" />

@@ -28,7 +28,7 @@ Android首页底部常用tab切换控件
  
 ```
 dependencies {
- 	compile 'com.isanwenyu.tabview:tabview:1.0.1'
+ 	compile 'com.isanwenyu.tabview:tabview:1.2.3'
 }
 ```
 - Maven:
@@ -37,7 +37,7 @@ dependencies {
 <dependency>
   <groupId>com.isanwenyu.tabview</groupId>
   <artifactId>tabview</artifactId>g
-  <version>1.0.1</version>
+  <version>1.2.3</version>
   <type>pom</type>
 </dependency>
 ```

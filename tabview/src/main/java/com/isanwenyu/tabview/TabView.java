@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.ColorRes;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -30,6 +31,7 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
 
     public static final int IMG_DEFAULT_SIZE = 30;
     public static final int TEXT_DEFAULT_SIZE = 14;
+    public static final boolean IS_TEXT_DEFAULT_SHOWN = true;
     private static final float IMG_DEFAULT_MARGIN = 0;
     private static final float IMG_CONTAINER_DEFAULT_PADDING = 2;
     ImageView mTabImgView;
@@ -58,6 +60,7 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
     private boolean mRippleEnable = true;//是否开启水波纹效果 默认为true
     private OnRippleCompleteListener mOnRippleCompleteListener;//用户设置的水波纹完成监听器
     private boolean mBadgeShow;//徽章控件是否显示
+    private boolean isTextShown = IS_TEXT_DEFAULT_SHOWN;
 
     public TabView(Context context) {
         this(context, null);
@@ -77,6 +80,8 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
         final TypedArray a = getContext().obtainStyledAttributes(
                 attrs, R.styleable.TabView, defStyle, 0);
 
+        isTextShown = a.getBoolean(
+                R.styleable.TabView_textShown, IS_TEXT_DEFAULT_SHOWN);
         mTextString = a.getString(
                 R.styleable.TabView_textString);
         mTextColor = a.getColorStateList(
@@ -136,6 +141,7 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
         mImgContainer = (FrameLayout) findViewById(R.id.layout_img_container);
         setGravity(Gravity.CENTER);
         //设置自定义属性
+        setTextShown(isTextShown);
         setTextString(mTextString);
         setTextColor(mTextColor);
         setTextSize(mTextSize);
@@ -151,6 +157,11 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
         //初始化徽章布局的目标布局
         mBadgeTextView.setTargetView(mImgContainer);
         setBadgeShown(mBadgeShow);
+    }
+
+    public void setTextShown(boolean textShown) {
+        isTextShown = textShown;
+        mTabTextView.setVisibility(textShown ? VISIBLE : GONE);
     }
 
     public String getTextString() {
