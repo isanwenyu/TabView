@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 12
-        versionName "1.2.4"
+        versionCode 13
+        versionName "1.2.5"
     }
     buildTypes {
         release {
@@ -36,7 +36,7 @@ ext {
     libraryDescription = 'Android首页底部常用tab切换控件'
     siteUrl = 'https://github.com/isanwenyu/TabView'
     gitUrl = 'https://github.com/isanwenyu/TabView.git'
-    libraryVersion = '1.2.4'
+    libraryVersion = '1.2.5'
     developerId = 'isanwenyu'
     developerName = 'isanwenyu'
     developerEmail = 'isanwenyu@163.com'
