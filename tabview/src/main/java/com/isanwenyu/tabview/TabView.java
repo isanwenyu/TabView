@@ -219,6 +219,7 @@ public class TabView extends RippleView implements Checkable, BadgeViewControl, 
             //如果自定义
             FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) mTabImgView.getLayoutParams();
             layoutParams.height = (int) mImgDimension;
+            layoutParams.width = (int) mImgDimension;
         }
         return this;
     }
